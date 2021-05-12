@@ -30,27 +30,33 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex sm:flex-col md:flex-row">
-        <div className="w-1/2 flex flex-col">
+      <div className="flex flex-col md:flex-row">
+        <div className="xs:w-full md:w-1/2 flex flex-col">
           <h1 className="pb-2 text-center">Smile ID Demo</h1>
           <smart-camera-web ref={ref} />
+          {
+            images &&
+          <button onClick={()=>{window?.location.reload()}} className="btn btn-blue cursor-pointer text-center">Restart</button>
+          }
         </div>
 
-        <div className="w-1/2">
+        <div className="xs:full md:w-1/2">
           <h1 className="pb-2 text-center">Images</h1>
           {images ? (
-            <div className="flex">
-              {images.map((image,index)=>
-              {
-                console.log(image.image)
-                return(
-                  <div key={index} className="">
-                  <Image width={200} height={200} src={image.image} />
+            <div className="grid auto-rows-max grid-cols-1 md:grid-cols-2 gap-4">
+              {images.map((image, index) => {
+                console.log(typeof image.image);
+                return (
+                  <div key={index} className="mx-auto">
+                    <img
+                      // width={200}
+                      // height={200}
+                      src={`data:image/jpeg;base64,${image.image}`}
+                    />
+                    <div className="text-md font-bold text-blue-600 text-center">{index==0 ? "Full Image":`#${image.image_type_id}`}</div>
                   </div>
-                )
-              }
-              )
-              }
+                );
+              })}
             </div>
           ) : (
             <p className="text-center text-md">Images Taken will load here</p>
