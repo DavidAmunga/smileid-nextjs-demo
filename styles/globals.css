@@ -13,6 +13,9 @@ h1{
   @apply font-bold py-2 px-4 rounded ;
 }
 
+.powered-by{
+  display:none !important;
+}
 .btn-blue {
   @apply bg-blue-500 hover:bg-blue-700 text-white;
 }
